@@ -1,5 +1,56 @@
-grapql 공부 {
-graphql 사이트
-https://graphql-kr.github.io/learn/queries/#
+orm(object relation mapping){
+    object와 RDBMS의 데이터를 자동으로 mapping(연결)
+    database <--mapping--> object field
+    객체를 통해 간접적으로 데이터베이스를 만질 수 있다.
+
+    Pros
+    직관적이고 프로그램에 용이, 생산성 가동성 증가
+    재사용 및 유지보수 용이
+    DBMS 종속성이 줄어든다
+
+    Cons
+    사용은 편하지만 설계에 신중..
+    복잡할수록 난이도 상승
+    procedure가 많으면 ORM이 작동하는 과정에서 생산성 저하 리스크 상승
 }
 
+
+NVM{
+    js노드버전관리
+    nvm ls  #list 보기
+    nvm install --lts #최신 lts버전 설치
+    nvm use [certain version] #임의의 버전 사용하기
+    @ prisma는 12.6버전 이상 사용가능 21.10.8 기준
+}
+
+Prisma(orm의 종류){
+    js,ts,go <--mapping-> mysql,postgreSQL,SQLite,MSSQL
+    ts와 조합이 좋다.
+    built with Rust
+
+    @생성되는 env(환경변수 파일)은 업로드x security issue
+     데이터베이스의 정보가 업로드 되면 안된다.
+
+    prisma client는 node_modules 안에 존재
+    
+    서버에서 클라이언트 생성 후
+    import { PrismaClient } from "@prisma/client";
+    const client = new PrismaClient();
+    간단히 client.?.?와 같은 형식으로 create delete 등 다양한 db 조작도 가능
+}
+
+postgreSQL{
+    ORDBMS
+    MySQL 비교하여 SQL 표준을 더 잘 지원/ 기능이 더 강력
+    다만 CRUD 성능이 좋지 않다.
+    
+    prisma migration
+    database model 만들기 -> 데이터베이스 연동
+     
+    sudo service postgresql start (서버? 시작)
+    sudo -u postgres psql (psql 터미널 시작)
+    create database [mydb]; (데이터베이스 만들기 세미콜론 필수!!)
+    alter user [postgres(사용자)] with password '[password]';
+    \c [mydb] - 데이터베이스에 접속
+    그리고 npx prisma migrate dev
+}

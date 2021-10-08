@@ -1,0 +1,21 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// database model 만들기
+model Movie{
+  id        Int      @id @default(autoincrement()) // 자동으로 1.2.3.4... 늘어나는 숫자
+  title     String
+  year      Int
+  genre     String?  // ?는 필수 항목이 아닐때 접미어 or default로 required
+  createdAt DateTime @default(now()) // database에 creation 시간을 추가
+  updatedAt DateTime @updatedAt // 저장할 때마다 매번 날짜 저장
+}

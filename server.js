@@ -6,40 +6,51 @@
 // Apollo server와 grapQL을 import
 // ApolloServer는 서버 인스턴스 생성자
 import { ApolloServer, gql } from "apollo-server"; // babel로 js 문법을 구버전 브라우저에서 인식하도록 compiling(변환) 다만 테스트 단계에서만 사용(성능저하)
+import { PrismaClient } from "@prisma/client";
 
+const client = new PrismaClient(); // database와 소통하기 위한 prismaclient 생성하기
 // gql은 js로 스키마 정의를 위한 'template literal tag' 백팁(`) 이용
 // 템플릿 리터럴에서 String Interpolation: ${}로 표현, 변수 삽입 가능, 마치 python의 f-string과 비슷
 // 이후에는 숫자든지간에 강제로 String type으로 변환된다.
 const typeDefs = gql`
   type Movie {
-    title: String
-    year: Int
+    id: Int!${/*!로 field가 non-nullable임을 의미*/ ""}
+    title: String!
+    year: Int!
+    genre: String
+    createdAt: String!
+    updatedAt: String!
   }
   type Query {
     movies: [Movie]
-    movie: Movie
+    movie(id: Int!): Movie
   }
   type Mutation {
-    createMovie(title: String!): Boolean
-    deleteMovie(title: String!): Boolean
+    createMovie(title: String!, year: Int!, genre: String): Movie
+    deleteMovie(id: String!): Boolean
   }
 `;
 
 const resolvers = {
   Query: {
-    movies: () => [],
-    movie: () => ({ title: "Beautiful Life", year: 1990 }), // => ({객체반환})
+    movies: () => client.movie.findMany, // client를 사용해 movie data 검색
+    movie: (_, { id }) => ({ title: "Beautiful Life", year: 1990 }), // => ({객체반환})
   },
 
   Mutation: {
     // mutation:(root,args,context,info) => "",
     // 4가지의 매개변수를 가질 수 있다.
-    createMovie: (_, { title }) => {
-      console.log(title);
-      return true;
-    },
-    deleteMovie: (_, { title }) => {
-      console.log(title);
+    // title,year,genre를 가진 type:movie를 만들어 database에 저장
+    createMovie: (_, { title, year, genre }) =>
+      client.movie.create({
+        data: {
+          title,
+          year,
+          genre,
+        },
+      }),
+    // id를 통해서 database의 movie delete
+    deleteMovie: (_, { id }) => {
       return true;
     },
   },
