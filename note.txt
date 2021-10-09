@@ -39,6 +39,12 @@ Prisma(orm의 종류){
     간단히 client.?.?와 같은 형식으로 create delete 등 다양한 db 조작도 가능
 }
 
+Prisma Studio{
+    npx prisma studio
+    database를 시각적으로 brawsing 해주며 수정 또한 가능
+    매우 편리하다..
+}
+
 postgreSQL{
     ORDBMS
     MySQL 비교하여 SQL 표준을 더 잘 지원/ 기능이 더 강력

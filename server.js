@@ -27,20 +27,21 @@ const typeDefs = gql`
   }
   type Mutation {
     createMovie(title: String!, year: Int!, genre: String): Movie
-    deleteMovie(id: String!): Boolean
+    deleteMovie(id: Int!): Movie
+    updateMovie(id: Int!, title: String, year: Int, genre: String): Movie
   }
 `;
 
 const resolvers = {
   Query: {
-    movies: () => client.movie.findMany, // client를 사용해 movie data 검색
-    movie: (_, { id }) => ({ title: "Beautiful Life", year: 1990 }), // => ({객체반환})
+    movies: () => client.movie.findMany(), // Read => client를 사용해 movie data 검색
+    movie: (_, { id }) => client.movie.findUnique({ where: { id } }), // es6 문법 {id} == {id:id}
   },
 
   Mutation: {
     // mutation:(root,args,context,info) => "",
     // 4가지의 매개변수를 가질 수 있다.
-    // title,year,genre를 가진 type:movie를 만들어 database에 저장
+    // Create => title,year,genre를 가진 type:movie를 만들어 database에 저장
     createMovie: (_, { title, year, genre }) =>
       client.movie.create({
         data: {
@@ -49,10 +50,11 @@ const resolvers = {
           genre,
         },
       }),
-    // id를 통해서 database의 movie delete
-    deleteMovie: (_, { id }) => {
-      return true;
-    },
+    // Delete => id를 통해서 database의 movie delete
+    deleteMovie: (_, { id }) => client.movie.delete({ where: { id } }),
+    // Update => id값으로 특정 data를 업데이트해주기)
+    updateMovie: (_, { id, title, year, genre }) =>
+      client.movie.update({ where: { id }, data: { title, year, genre } }),
   },
 };
 
