@@ -1,62 +1,44 @@
-orm(object relation mapping){
-    object와 RDBMS의 데이터를 자동으로 mapping(연결)
-    database <--mapping--> object field
-    객체를 통해 간접적으로 데이터베이스를 만질 수 있다.
+divide by the roles{
+    server 파일에 너무 다양한 목적의 코드들이 산재하여 있으므로
+    나눠서 파일을 생성
 
-    Pros
-    직관적이고 프로그램에 용이, 생산성 가동성 증가
-    재사용 및 유지보수 용이
-    DBMS 종속성이 줄어든다
-
-    Cons
-    사용은 편하지만 설계에 신중..
-    복잡할수록 난이도 상승
-    procedure가 많으면 ORM이 작동하는 과정에서 생산성 저하 리스크 상승
+    client
+    schema{
+        typeDefs,
+        queries,
+        mutations,
 }
 
+merging files{
+    나눈 후 grapgql-tools를 통해서 schema file에 다시 merge
+    npm i graphql-tools
 
-NVM{
-    js노드버전관리
-    nvm ls  #list 보기
-    nvm install --lts #최신 lts버전 설치
-    nvm use [certain version] #임의의 버전 사용하기
-    @ prisma는 12.6버전 이상 사용가능 21.10.8 기준
-}
-
-Prisma(orm의 종류){
-    js,ts,go <--mapping-> mysql,postgreSQL,SQLite,MSSQL
-    ts와 조합이 좋다.
-    built with Rust
-
-    @생성되는 env(환경변수 파일)은 업로드x security issue
-     데이터베이스의 정보가 업로드 되면 안된다.
-
-    prisma client는 node_modules 안에 존재
+    1. loadFilesSync()로 파일들 찾기
+    ex) const loadedFiles = 
+    loadFilesSync(`${__dirname}/schema/**/*.graphql`);
+    디렉토리 -> schema/모든폴더/모든파일.끝확장자가 graphql인 파일들만
     
-    서버에서 클라이언트 생성 후
-    import { PrismaClient } from "@prisma/client";
-    const client = new PrismaClient();
-    간단히 client.?.?와 같은 형식으로 create delete 등 다양한 db 조작도 가능
-}
+    load는 export default된 인자를 바탕으로 가져온다.
 
-Prisma Studio{
-    npx prisma studio
-    database를 시각적으로 brawsing 해주며 수정 또한 가능
-    매우 편리하다..
-}
+    glob -> pattern languege{ 
+        ** //inside of every folders
+        * //any files
+        .{}.{} //확장자 및 이름
+    }
 
-postgreSQL{
-    ORDBMS
-    MySQL 비교하여 SQL 표준을 더 잘 지원/ 기능이 더 강력
-    다만 CRUD 성능이 좋지 않다.
+    2. mergerTypeDefs()나 mergeResolvers()로 merging
     
-    prisma migration
-    database model 만들기 -> 데이터베이스 연동
-     
-    sudo service postgresql start (서버? 시작)
-    sudo -u postgres psql (psql 터미널 시작)
-    create database [mydb]; (데이터베이스 만들기 세미콜론 필수!!)
-    alter user [postgres(사용자)] with password '[password]';
-    \c [mydb] - 데이터베이스에 접속
-    그리고 npx prisma migrate dev
+    3. 스키마 생성 
+    const schema = makeExcutableSchema({typeDefs,resolvers})
+}   
+
+가상환경 설정{
+    가상환경에서 .env파일을 읽을 수 있도록 설정
+
+    npm i dotenv -> env 읽기 위해 설치
+    사용시에는 다른 import 이전에 코드 최상단에 위치
+
+    import와 동시에 실행시키는 방법은
+    require("dotenv").config();
+    
 }
