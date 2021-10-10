@@ -10,12 +10,15 @@ generator client {
   provider = "prisma-client-js"
 }
 
-// database model 만들기
-model Movie{
-  id        Int      @id @default(autoincrement()) // 자동으로 1.2.3.4... 늘어나는 숫자
-  title     String
-  year      Int
-  genre     String?  // ?는 필수 항목이 아닐때 접미어 or default로 required
-  createdAt DateTime @default(now()) // database에 creation 시간을 추가
-  updatedAt DateTime @updatedAt // 저장할 때마다 매번 날짜 저장
+// User 정보 수집 항목
+// username과 이메일은 unique 설정
+model User {
+  id        Int      @id @default(autoincrement())
+  firstName String
+  lastName  String?
+  userName  String   @unique
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
