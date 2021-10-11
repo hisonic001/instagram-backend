@@ -14,6 +14,18 @@ const server = new ApolloServer({
 const PORT = process.env.PORT; //env에서 PORT 가져오기
 
 // 서버를 시작하면 콘솔로그를 출력해준다.
-server
-  .listen(PORT)
-  .then(() => console.log(`⚡Server is running on http://localhost:${PORT}/`));
+server.listen(PORT).then(() =>
+  console.log(
+    `    ┊         ┊       ┊   ┊    ┊        ┊ ┊.⋆˚
+    ┊         ┊       ┊   ┊    ┊        ┊ ˚✧
+    ┊         ┊       ┊   ┊   ˚➶ ｡˚   ☁
+    ┊         ┊       ┊    ☁
+    ⁭⁭┊         ┊       ☪.      ⁭ ⁭ ⁭ ⁭ ⁭ ⁭ ⁭ ⁭ ⁭ ⁭ ⁭ ⁭ ⁭ ⁭ ⁭ ⁭ ⁭
+    ⁭┊         ✱ ⁭ ⁭ ⁭ ⁭ ⁭ ⋆˚ ⁭ ⁭ ⁭ ⁭ ⁭ ⁭ ⁭ ⁭ ⁭ ⁭ ⁭ ⁭ ⁭ ⁭ ⁭ ⁭ ⁭ ⁭
+    ┊         ★   ✧                             ⁭ ⁭ ⁭ ⁭ ⁭
+    ✧ ⋆    . ┊ .  ✱˚ ⁭ ⁭ ⁭ ⁭ ⁭ ⁭ ⁭ ⁭ ⁭ ⁭ ⁭     ⁭
+    ★
+
+    Server is running on http://localhost:${PORT}/`
+  )
+);

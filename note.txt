@@ -52,8 +52,30 @@ User{
         login 성공!
 
         salt and papper / rainbow table?? 나중에 찾아보기
+    }
 
+    login process{
+        username을 바탕으로 db에 있는지 확인 후 (아닐시 에러)
+        hash.compare(password, hashed password) => boolean
+        password 확인 후 (아닐시 에러)
+        token 발행
 
-    
+        json webtoken(jwt){
+            login시에 sign된 토큰을 user에게 발행해줌
+            server에 request시에 token(sign의 진위여부확인)은
+            sepecific한 유저라는 것을 인증하고
+            db의 정보에 접속가능
+            ex) jwt를 활용한 코로나 QR code check in system
+
+            토큰에 사인하기
+            jwt.sign(payload(토큰에 넣을 정보들), secretOrPrivateKey)
+            옵션으로 expiresIn을 설정하면 일 시간 단위등으로 유효기간 설정가능
+        
+            cookies - browser에서 사용
+            sessions - every user data in db, keep tracking
+                       force logout user by deleting sessions
+                       check how many people or devices share accounts
+                       need huge DB maintainance -> can use redis(cheap db)
+        }
     }
 }

@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "nodemon --exec babel-node server",
     "migrate": "npx prisma migrate dev",
-    "studio": "npx prisma studio"
+    "studio": "npx prisma studio",
+    "db": "sudo service postgresql start"
   },
   "repository": {
     "type": "git",
@@ -28,12 +29,14 @@
     "bcryptjs": "^2.4.3",
     "dotenv": "^10.0.0",
     "graphql": "^15.6.1",
-    "graphql-tools": "^8.2.0"
+    "graphql-tools": "^8.2.0",
+    "jsonwebtoken": "^8.5.1"
   },
   "devDependencies": {
     "@babel/core": "^7.15.8",
     "@babel/node": "^7.15.8",
     "@babel/preset-env": "^7.15.8",
+    "@types/jsonwebtoken": "^8.5.5",
     "nodemon": "^2.0.13",
     "prettier-plugin-prisma": "^3.1.1",
     "prisma": "^3.2.1"
