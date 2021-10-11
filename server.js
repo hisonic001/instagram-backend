@@ -5,10 +5,16 @@
 require("dotenv").config();
 import { ApolloServer } from "apollo-server"; // babel로 js 문법을 구버전 브라우저에서 인식하도록 compiling(변환) 다만 테스트 단계에서만 사용(성능저하)
 import schema from "./schema";
+import { getUser } from "./users/user.util";
 
 // import한 tyDefs와 resolvers로 new ApploServer 시작
 const server = new ApolloServer({
   schema,
+  context: async ({ req }) => {
+    return {
+      loggedInUser: await getUser(req.headers.authorization),
+    };
+  },
 });
 
 const PORT = process.env.PORT; //env에서 PORT 가져오기

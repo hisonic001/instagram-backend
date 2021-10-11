@@ -78,4 +78,22 @@ User{
                        need huge DB maintainance -> can use redis(cheap db)
         }
     }
+
+    es6 ... 문법{
+        ...([if true return]&& {return 하고 싶은 값})
+        나중에 찾아보기
+    }
+
+    http headers{
+        section of request and response
+        by http header user automatically sends token
+
+        token을 http header에 집어넣어서
+        schema에서 token을 사용하지 않도록 코딩
+    }
+
+    reduce redundancy{
+        efficiency of code
+        계속해서 사용되는 문장을 줄여준다.
+    }
 }
