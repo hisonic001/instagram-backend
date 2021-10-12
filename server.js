@@ -4,12 +4,15 @@
 // json package 파일에서 dependency와 script(nodemon --exec node server.js) 수정
 require("dotenv").config();
 import { ApolloServer } from "apollo-server"; // babel로 js 문법을 구버전 브라우저에서 인식하도록 compiling(변환) 다만 테스트 단계에서만 사용(성능저하)
-import schema from "./schema";
+import { typeDefs, resolvers } from "./schema";
 import { getUser } from "./users/user.util";
 
 // import한 tyDefs와 resolvers로 new ApploServer 시작
 const server = new ApolloServer({
-  schema,
+  // gql이 아닌 apolloserver에서 직접 schema create
+  // to use Upload scalar type built in apollo server
+  typeDefs,
+  resolvers,
   context: async ({ req }) => {
     return {
       loggedInUser: await getUser(req.headers.authorization),

@@ -21,3 +21,17 @@ export const getUser = async (authorization) => {
     return null;
   }
 };
+
+// resolver가 실행되기 전에 user가 login되어 있는지 context(token)의 유무로 확인
+// function oriented programming -> function을 받고 function을 return
+// OurResolver function을 받아서 다시 OurResolver fuction을 return
+// ex) protectResolver(OurResolver(root,args,context,info))와 비슷하게 동작
+export const protectResolver = (ourResolver) => (root, args, context, info) => {
+  if (!context.loggedInUser) {
+    return {
+      ok: false,
+      error: "you are not logged in",
+    };
+  }
+  return ourResolver(root, args, context, info);
+};

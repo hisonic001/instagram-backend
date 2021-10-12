@@ -71,11 +71,7 @@ User{
             jwt.sign(payload(토큰에 넣을 정보들), secretOrPrivateKey)
             옵션으로 expiresIn을 설정하면 일 시간 단위등으로 유효기간 설정가능
         
-            cookies - browser에서 사용
-            sessions - every user data in db, keep tracking
-                       force logout user by deleting sessions
-                       check how many people or devices share accounts
-                       need huge DB maintainance -> can use redis(cheap db)
+            
         }
     }
 
@@ -90,10 +86,43 @@ User{
 
         token을 http header에 집어넣어서
         schema에서 token을 사용하지 않도록 코딩
+
+        included in general header{
+            Status Code,
+            Request URL,
+            ...
+        }
+
+        included in request header{
+            Host - host명
+            cookies - browser에서 사용
+            sessions - every user data in db, keep tracking
+                   force logout user by deleting sessions
+                   check how many people or devices share accounts
+                   need huge DB maintainance -> can use redis(cheap db)
+            User-Agent - client 식별가능 정보 ex) OS, browser version...
+            ex) User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64)
+                AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81
+                Safari/537.36
+        
+        included in response header{
+            Server - server 정보
+            Set-Cookie - cookie 원할때
+        }
     }
 
     reduce redundancy{
         efficiency of code
         계속해서 사용되는 문장을 줄여준다.
     }
+
+    Altair GraphQl Client{
+        apollo server client로 playground와 다르게
+        file upload를 지원해준다.
+
+        서버 DB에는 파일저장 x, only cide
+        주로 aws 같은 외부 서버에 저장 후 URL을 return 해주면
+        그 url을 서버DB 에 저장
+    }
+    
 }

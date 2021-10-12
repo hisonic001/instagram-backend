@@ -3,16 +3,13 @@
 // gql-tools update로 인해서 merge,load,schema 따로 설치해줘야함 npm i @graph-tools/merge...
 import { loadFilesSync } from "@graphql-tools/load-files";
 import { mergeResolvers, mergeTypeDefs } from "@graphql-tools/merge";
-import { makeExecutableSchema } from "@graphql-tools/schema";
 
 // typedefs load 후에 merge로 합쳐주기
 const loadedTypes = loadFilesSync(`${__dirname}/**/*.typeDefs.js`);
-const typeDefs = mergeTypeDefs(loadedTypes);
+export const typeDefs = mergeTypeDefs(loadedTypes);
 
 // resolvers load 후에 merge로 합쳐주기
 const loadedResolvers = loadFilesSync(`${__dirname}/**/*.resolvers.js`);
-const resolvers = mergeResolvers(loadedResolvers);
+export const resolvers = mergeResolvers(loadedResolvers);
 
-const schema = makeExecutableSchema({ typeDefs, resolvers });
-
-export default schema;
+// schema를 apollo server가 만들게 하여 upload file schema가 사용가능하게 한다.
