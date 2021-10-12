@@ -11,6 +11,9 @@ const resolverFnc = async (
   { firstName, lastName, userName, password: newPassword, email, bio, avatar },
   { loggedInUser }
 ) => {
+  const { filename, createReadStream } = await avatar;
+  const stream = createReadStream(); //avatar 안에 createReadStream 함수가 포함되어 있음
+  console.log(`avatar=${avatar}, stream=${stream}`);
   // protect the resolver by checking context info(token)
   // hash the PWD if user input newPWD and return it
   let hashedPWD = null;
