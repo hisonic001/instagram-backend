@@ -128,12 +128,69 @@ User{
         I/O란 Input과 Output의 약자로 입력과 출력, 간단히 줄여서 입출력이라고 한다. 입출력은 컴퓨터 내부 또는 외부의 장치와 프로그램 간의 데이터를 주고받는 것을 말한다.
         자바에서 모든 입출력은 스트림(stream)을 통해 이루어진다.
         데이터를 운반하는데 사용되는 연결통로이다.
+
          스트림이란 자료(data) 흐름이 물의 흐름과 같다는 의미에서 사용되었다. 물이 한쪽 방향으로만 흐르는 것과 같이 스트림은 단방향 통신만 가능하기 때문에 하나의 스트림으로 입력과 출력을 동시에 처리할 수 없다.
         입력과 출력을 동시에 수행하려면 입력을 위한 입력 스트림(input stream)과 출력을 위한 출력 스트림(output stream), 모두 2개의 스트림이 필요하다.
         스트림은 먼저 보낸 데이터를 먼저 받게 되어 있으며
         연속적으로 데이터를 주고받는다.
+
          큐(queue)와 같은 FIFO(First In First Out) 구조로 되어 있다.
         데이터 근원지를 Source, 데이터 종착점을 Sink, 연결한 것을 Stream
-        Source - 입력 스트림 - 출력 스트림 - Sink로 연결된다.}
+        Source - 입력 스트림 - 출력 스트림 - Sink로 연결된다.
+        
+        createReadStream() // 스트림 읽기
+        createWriteStream({path}) // 스트림 쓰기
+        pipe 활용하기
+        ex) readStream.pipe(writeStream); 간단히 두개를 연결
 
+
+        }
+
+    암호화{
+        rainbow table{
+            hashing 해놓은 easy한 암호들 ex) 1234,0000..
+            
+            Salt{
+                very random piece of text
+                hashing 할 때 salt를 끼워넣어서 같이 hash
+                -> result는 랜덤한 hashed passward
+
+                rainbow table로 부터 보호!
+            }
+        }
+
+    apollo-server-express{
+        express-server - framework contains {lib,middleWare} to make web app
+        middleWare로 확장성을 가진다.
+
+        cant use RESTAPI or Socket IO with portal-server(just apollo-server)
+        
+        apollo-server로는 gql url만 돌려서 schema 만들기, db관련 업무만 수행
+        그외에는 express-server를 활용
+    }
+    
+    morgan {
+        nodeJS에서 log 관리를 위한 미들웨어
+        :easy to manage logs
+        :token or usable utilities
+        :log management customize
+
+        ! log의 포맷 지정{
+        로그의 포맷을 아래와 같이 선택하거나 지정할 수 있습니다.
+        app.use(morgan('combined'));
+
+        combined 외에도 다음과 같은 선택 값이 있습니다.
+        'combined'
+        'tiny'
+        'dev'
+        'common'
+
+        Format을 직접 아래와 같이 지정할 수도 있습니다.
+        :url // url
+        :status // 상태 코드
+        :req[header] // 요청 헤더
+        :res[header] // 응답 헤더
+        :response-time // 응답시간
+        :method // 요청 방식}
+    }
 }

@@ -1,6 +1,8 @@
 import client from "../../client";
 import bcrypt from "bcryptjs";
 import { protectResolver } from "../user.util";
+import { createWriteStream } from "fs";
+
 const saltRounds = 10;
 
 // user profile changing process
@@ -11,9 +13,22 @@ const resolverFnc = async (
   { firstName, lastName, userName, password: newPassword, email, bio, avatar },
   { loggedInUser }
 ) => {
-  const { filename, createReadStream } = await avatar;
-  const stream = createReadStream(); //avatar 안에 createReadStream 함수가 포함되어 있음
-  console.log(`avatar=${avatar}, stream=${stream}`);
+  // url 변수 설정
+  let avatarUrl = null;
+  if (avatar) {
+    const { filename, createReadStream } = await avatar;
+    const newFilename = `${loggedInUser.id}-${Date.now}-${filename}`;
+    // avatar 안에 createReadStream 함수가 포함되어 있음
+    const readStream = createReadStream();
+    // process.cwd() => path argument로 current workign directory + 경로 + filename을 입력
+    const writeStream = createWriteStream(
+      process.cwd() + "/uploads/" + newFilename
+    ); // unique한 파일 이름을 만들기 위해 user.id와 date를 추가
+    // pipe 연결. 실제로는 AWS 를 활용
+    readStream.pipe(writeStream);
+    // newFilename을 바탕으로 한 URL을 변수에 저장
+    avatarUrl = `http://localhost:4000/static/${newFilename}`; // just to check url is saved in DB
+  }
   // protect the resolver by checking context info(token)
   // hash the PWD if user input newPWD and return it
   let hashedPWD = null;
@@ -29,7 +44,7 @@ const resolverFnc = async (
       userName,
       email,
       bio,
-      avatar,
+      ...(avatarUrl && { avatar: avatarUrl }),
       ...(hashedPWD && { password: hashedPWD }),
       // es6 ... 문법 note
       // same as if (hashedPWD){return password:hashedPWD}

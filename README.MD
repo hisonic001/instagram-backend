@@ -12,7 +12,8 @@
     [✔] Create Account
     [✔] See Profile
     [✔] Login
-    [] Edit Profile
+    [✔] Edit Profile
+    [✔] Image Upload(Avatar)
     [] Follow User
     [] Unfollow User
     [] Change Avatar (Image Upload)
