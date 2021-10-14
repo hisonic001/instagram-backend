@@ -21,6 +21,11 @@ model User {
   password  String
   bio       String? // for editProfile
   avatar    String? // for editProfile, image
+  // follower와 following을 서로 relation으로 묶음
+  // self referencing relationship 같은 relation name & references
+  // follwer와 following은 User의 Array
+  follower  User[]   @relation("FollowRelation", references: [id])
+  following User[]   @relation("FollowRelation", references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
