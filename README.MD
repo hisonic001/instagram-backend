@@ -1,19 +1,42 @@
-# Instaclone
+# Instagram clone
 
-# Instaclone Backend:
+## Code Url
 
-    - Prisma & gql
-    - Babel
-    - Postgresql
-    - dotenv
+https://github.com/hisonic001/instagram-backend
 
-# User:
+---
 
-    [✔] Create Account
-    [✔] See Profile
-    [✔] Login
-    [✔] Edit Profile
-    [✔] Image Upload(Avatar)
-    [] Follow User
-    [] Unfollow User
-    [] Change Avatar (Image Upload)
+# Backend Part
+
+## Built with
+
+- Prisma Express & GraphQL
+- Babel
+- DB : Postgresql
+- dotenv
+- jsonwebtoken
+- bcrypt
+
+---
+
+# User Roadmap
+
+```
+[✔] Create Account
+[✔] See Profile
+[✔] Login
+[✔] Edit Profile
+[✔] Image Upload(Avatar)
+[✔] Follow User
+[✔] Unfollow User
+[✔] See Followers with Offset Pagination
+[] See Following with Cursor based Pagination
+[] Computed Fields
+[] Search Users
+```
+
+---
+
+### Working Progress
+
+## **Frontend Part**

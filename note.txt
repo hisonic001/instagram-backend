@@ -1,0 +1,35 @@
+followers/following{
+    너무 많은 팔로워가 존재시 전부 로딩하는 것은 비효율적
+    ex) insta에서 팔로워를 보려하면 일부만 보이고 스크롤을 내리면
+        추가로 팔로워를 로딩
+
+    pagination 활용{
+        Offset pagination{
+            전체 page 수를 count 하고
+            특정 page를 입력하면 한 page당 take 수 만큼 출력
+            그리고 page 수가 늘어날 때마다 records를 skip하는 수식 설정
+
+            pros
+            can jump to any page immediately
+            same result in any sort order
+            
+            cons
+            skip 100000000 record and take first 10 records
+            -> still need to traverse the fist 1000000000 recordes
+               before returning 10 that i asked
+        }
+        
+
+        cursor based pagination{
+            마지막으로 받은 records가 무엇인지 확인하는 것이 point
+
+            pros
+            scale 적인 측면에서 장점
+            infinite scroll에 유리!
+
+            cons
+            특정 페이지로 바로 이동하는 것이 어렵다
+
+        }
+    }
+}

@@ -14,7 +14,7 @@ const resolverFnc = async (_, { userName }, { loggedInUser }) => {
   await client.user.update({
     where: { id: loggedInUser.id },
     data: { following: { connect: { userName } } },
-  });
+  }); // connect는 follow-follower relation을 연결시킨다
   return {
     ok: true,
   };
