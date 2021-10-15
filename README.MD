@@ -4,29 +4,24 @@
 
 https://github.com/hisonic001/instagram-backend
 
-<<<<<<< HEAD
----
-
-=======
+_________________________________________________________
 
 
->>>>>>> ce7be82a80c64e1b3e580d0c4d7f40cccd9f6fe1
+
 # Backend Part
 
 ## Built with
 
+```
 - Prisma Express & GraphQL
 - Babel
 - DB : Postgresql
 - dotenv
 - jsonwebtoken
 - bcrypt
+```
+_________________________________________________________
 
-<<<<<<< HEAD
----
-=======
-
->>>>>>> ce7be82a80c64e1b3e580d0c4d7f40cccd9f6fe1
 
 # User Roadmap
 
@@ -36,11 +31,10 @@ https://github.com/hisonic001/instagram-backend
 [✔] Login
 [✔] Edit Profile
 [✔] Image Upload(Avatar)
-<<<<<<< HEAD
 [✔] Follow User
 [✔] Unfollow User
 [✔] See Followers with Offset Pagination
-[] See Following with Cursor based Pagination
+[✔] See Following with Cursor based Pagination
 [] Computed Fields
 [] Search Users
 ```
@@ -48,19 +42,14 @@ https://github.com/hisonic001/instagram-backend
 ---
 
 ### Working Progress
+<br>
+Create Sample Account
 
-=======
-[] Follow User
-[] Unfollow User
-```
+![ezgif com-gif-maker](https://user-images.githubusercontent.com/40854017/137442167-fc150e88-fdc5-4a4d-b779-4f3dbb95a8ae.gif)
 
+Sample Follow User
 
-
-### Working Progress
-
+![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/40854017/137442140-1289ca4b-c117-47f4-95cf-db887967fc95.gif) 
 
 
-
-
->>>>>>> ce7be82a80c64e1b3e580d0c4d7f40cccd9f6fe1
 ## **Frontend Part**
