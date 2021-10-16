@@ -2,6 +2,7 @@ import client from "../../client";
 import { protectResolver } from "../user.util";
 
 const resolverFnc = async (_, { userName }, { loggedInUser }) => {
+  // username이 user 중에 있는지 확인
   const checkUserName = await client.user.findUnique({ where: { userName } });
   if (!checkUserName) {
     return {
@@ -10,22 +11,22 @@ const resolverFnc = async (_, { userName }, { loggedInUser }) => {
     };
   }
 
-  ////   미완성.. loggeduser의 followuser 중에 {userName}이 없으면 error
-  //   const checkFollower = await client.user
-  //     .findUnique({
-  //       where: { id: loggedInUser.id },
-  //     })
-  //     .follower({ select: { userName: true } });
+  // loggeduser의 followuser 중에 {userName}이 없으면 error
+  const checkFollower = await client.user.count({
+    where: {
+      id: loggedInUser.id,
+      following: { some: { userName } },
+    },
+  });
 
-  //   console.log(checkFollower);
+  if (!Boolean(checkFollower)) {
+    return {
+      ok: false,
+      error: "you are not following this user",
+    };
+  }
 
-  //   if (!checkFollower) {
-  //     return {
-  //       ok: false,
-  //       error: "you are not following is user",
-  //     };
-  //   }
-
+  // db 업데이트
   await client.user.update({
     where: { id: loggedInUser.id },
     data: { following: { disconnect: { userName } } },
@@ -37,6 +38,6 @@ const resolverFnc = async (_, { userName }, { loggedInUser }) => {
 
 export default {
   Mutation: {
-    unFollowUser: protectResolver(resolverFnc),
+    unFollowUser: protectResolver(resolverFnc), //login 확인절차
   },
 };

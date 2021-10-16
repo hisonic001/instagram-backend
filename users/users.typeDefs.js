@@ -13,5 +13,9 @@ export default gql`
     updatedAt: String!
     follower: [User]${/*array of User*/ ""}
     following: [User]
+    isFollowing: Boolean
+    isMySelf: Boolean
+    totalFollower: Int
+    totalFollowing: Int
   }
 `;
