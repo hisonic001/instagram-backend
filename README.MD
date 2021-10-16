@@ -4,15 +4,6 @@
 
 https://github.com/hisonic001/instagram-backend
 
-<<<<<<< HEAD
----
-
-=======
-_________________________________________________________
-
-
-
->>>>>>> 6124e0528ecf4018f764ce2a7187acb51fcef41d
 # Backend Part
 
 ## Built with
@@ -25,12 +16,6 @@ _________________________________________________________
 - jsonwebtoken
 - bcrypt
 ```
-_________________________________________________________
-
-<<<<<<< HEAD
-_____________________________________
-=======
->>>>>>> 6124e0528ecf4018f764ce2a7187acb51fcef41d
 
 # User Roadmap
 
@@ -45,23 +30,15 @@ _____________________________________
 [✔] Unfollow User
 [✔] See Followers with Offset Pagination
 [✔] See Following with Cursor based Pagination
-<<<<<<< HEAD
 [✔] Computed Fields
 [✔] Search Users
 
 ```
 
-_____________________________________
-
-### Working Progress
-=======
-[] Computed Fields
-[] Search Users
-```
-
 ---
 
 ### Working Progress
+
 <br>
 Create Sample Account
 
@@ -69,9 +46,6 @@ Create Sample Account
 
 Sample Follow User
 
-![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/40854017/137442140-1289ca4b-c117-47f4-95cf-db887967fc95.gif) 
-
->>>>>>> 6124e0528ecf4018f764ce2a7187acb51fcef41d
+![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/40854017/137442140-1289ca4b-c117-47f4-95cf-db887967fc95.gif)
 
 ## **Frontend Part**
-```
