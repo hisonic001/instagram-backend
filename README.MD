@@ -17,7 +17,7 @@ https://github.com/hisonic001/instagram-backend
 - bcrypt
 ```
 
-# User Roadmap
+## User Roadmap
 
 ```
 
@@ -35,6 +35,21 @@ https://github.com/hisonic001/instagram-backend
 
 ```
 
+## Photo Roadmap
+
+```
+[✔] Upload Photo
+[✔] See Photo
+[✔] See Caption
+[✔] See Hashtags
+[] Edit Photo
+[] Like / Unlike Photo
+[] See Photo Likes
+[] See Feed
+[] Search Photos
+
+```
+
 ---
 
 ### Working Progress
@@ -49,3 +64,5 @@ Sample Follow User
 ![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/40854017/137442140-1289ca4b-c117-47f4-95cf-db887967fc95.gif)
 
 ## **Frontend Part**
+
+update soon...

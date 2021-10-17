@@ -1,6 +1,6 @@
 import { UserInputError } from "apollo-server";
 import client from "../../client";
-import { protectResolver } from "../user.util";
+import { protectResolver } from "../users.util";
 
 const resolverFnc = async (_, { userName }, { loggedInUser }) => {
   const checkUserName = await client.user.findUnique({ where: { userName } });

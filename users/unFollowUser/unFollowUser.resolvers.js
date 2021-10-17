@@ -1,5 +1,5 @@
 import client from "../../client";
-import { protectResolver } from "../user.util";
+import { protectResolver } from "../users.util";
 
 const resolverFnc = async (_, { userName }, { loggedInUser }) => {
   // username이 user 중에 있는지 확인

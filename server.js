@@ -6,7 +6,7 @@ require("dotenv").config();
 import express from "express"; // express 서버
 import { ApolloServer } from "apollo-server-express"; // babel로 js 문법을 구버전 브라우저에서 인식하도록 compiling(변환) 다만 테스트 단계에서만 사용(성능저하)
 import { typeDefs, resolvers } from "./schema";
-import { getUser } from "./users/user.util";
+import { getUser } from "./users/users.util";
 import logger from "morgan";
 
 const PORT = process.env.PORT; //env에서 PORT 가져오기

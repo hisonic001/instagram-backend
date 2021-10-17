@@ -1,6 +1,6 @@
 import client from "../../client";
 import bcrypt from "bcryptjs";
-import { protectResolver } from "../user.util";
+import { protectResolver } from "../users.util";
 import { createWriteStream } from "fs";
 
 const saltRounds = 10;

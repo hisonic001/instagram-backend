@@ -32,4 +32,10 @@ followers/following{
 
         }
     }
+
+    Regular Expression/regex(정규표현식){
+        문자열 관련 parser 같은 부분에서 자주 활용됨
+        https://regexone.com/ regex 관련 하나씩 연습해보는 사이트
+        https://regex101.com/ debugging 및 연습
+    }
 }
