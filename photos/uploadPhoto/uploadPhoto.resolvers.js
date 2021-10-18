@@ -8,16 +8,20 @@ const resolverFnc = async (_, { file, caption }, { loggedInUser }) => {
   if (caption) {
     const hashtags = caption.match(/#[\w]+/g); // regex활용 #words만 추출
     // map => connectOrCreate에 활용 가능한 형식으로 hashtags 가공
-    hashtagObj = hashtags.map((hashtags) => ({
-      where: { hashtags },
-      create: { hashtags },
+    hashtagObj = hashtags.map((hashtag) => ({
+      where: { hashtag },
+      create: { hashtag },
     }));
   }
   return client.photo.create({
     data: {
       file,
       caption,
-      user: { connect: { id: loggedInUser.id } },
+      user: {
+        connect: {
+          id: loggedInUser.id,
+        },
+      },
       ...(hashtagObj.length > 0 && {
         hashtags: {
           connectOrCreate: hashtagObj,

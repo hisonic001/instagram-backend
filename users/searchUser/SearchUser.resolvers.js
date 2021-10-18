@@ -11,9 +11,9 @@ export default {
             mode: "insensitive",
             startsWith: keyword, // 혹시나 대문자로 쓸 경우 대비
           },
-          // take: 5,
-          // skip: lastRecord ? 1 : 0,
-          // ...(lastRecord && { cursor: { id: lastRecord } }),
+          take: 5,
+          skip: lastRecord ? 1 : 0,
+          ...(lastRecord && { cursor: { id: lastRecord } }),
         },
       }),
   },

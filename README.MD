@@ -40,8 +40,8 @@ https://github.com/hisonic001/instagram-backend
 ```
 [✔] Upload Photo
 [✔] See Photo
-[✔] See Caption
-[✔] See Hashtags
+[] See Hashtags
+[] See Caption
 [] Edit Photo
 [] Like / Unlike Photo
 [] See Photo Likes
