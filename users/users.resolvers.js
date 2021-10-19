@@ -43,5 +43,7 @@ export default {
       // id = loggin user && following에 Usertype 주체의 id가 있는지 확인하여
       // count한 숫자를 주면 0이 아닐시 Boolean 함수로 true를 return
     },
+
+    photos: ({ id }) => client.user.findUnique({ where: { id } }).photos(),
   },
 };

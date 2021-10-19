@@ -16,12 +16,18 @@ export default {
   },
 
   Hashtag: {
-    photos: (
-      { id } // id의 주체는 root인 hashtag
-    ) =>
-      client.hashtag.findMany({
+    // id의 주체는 root인 hashtag
+    photos: ({ id }, { page }) =>
+      client.hashtag
+        .findUnique({
+          where: { id },
+        })
+        .photos({ take: 5, skip: (page - 1) * 5 }),
+
+    totalPhotos: ({ id }) =>
+      client.photo.count({
         where: {
-          photos: {
+          hashtags: {
             some: { id },
           },
         },

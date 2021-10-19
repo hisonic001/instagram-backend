@@ -1,17 +1,13 @@
 import client from "../../client";
 import { protectResolver } from "../../users/users.util";
+import { composeHashtag } from "../photos.util";
 
 const resolverFnc = async (_, { file, caption }, { loggedInUser }) => {
   //   parse caption and create hashtag
   //  extract hashtag from caption with regex
   let hashtagObj = [];
   if (caption) {
-    const hashtags = caption.match(/#[\w]+/g); // regex활용 #words만 추출
-    // map => connectOrCreate에 활용 가능한 형식으로 hashtags 가공
-    hashtagObj = hashtags.map((hashtag) => ({
-      where: { hashtag },
-      create: { hashtag },
-    }));
+    hashtagObj = composeHashtag(caption);
   }
   return client.photo.create({
     data: {
@@ -39,6 +35,6 @@ const resolverFnc = async (_, { file, caption }, { loggedInUser }) => {
 
 export default {
   Mutation: {
-    uploadPhoto: protectResolver(resolverFnc),
+    uploadPhoto: () => protectResolver(resolverFnc),
   },
 };
