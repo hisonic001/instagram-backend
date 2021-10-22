@@ -10,8 +10,6 @@ export const typeDefs = mergeTypeDefs(loadedTypes);
 
 // resolvers load 후에 merge로 합쳐주기
 const loadedResolvers = loadFilesSync(`${__dirname}/**/*.resolvers.js`);
-console.log(loadedResolvers);
 export const resolvers = mergeResolvers(loadedResolvers);
-console.log(resolvers);
 
 // schema를 apollo server가 만들게 하여 upload file schema가 사용가능하게 한다.
