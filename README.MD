@@ -47,17 +47,25 @@ https://github.com/hisonic001/instagram-backend
 [✔] Like / Unlike Photo
 [✔] See Photo Likes
 [✔] See Feed
+[✔] See Photo Comments
+
 
 ```
 
 ## Comments
 
 ```
-[] Comment on Photo
-[] Edit Comment
-[] Delete Commnet
+[✔] Comment on Photo
+[✔] Edit Comment
+[✔] Delete Comment
 
 ```
+
+## AWS SDK
+
+[✔] Connect to AWS
+[✔] Upload Photo to AWS
+[✔] Upload Avatar to AWS
 
 ---
 

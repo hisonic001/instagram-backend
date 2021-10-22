@@ -28,6 +28,7 @@
     "apollo": "^2.33.6",
     "apollo-server": "^3.4.0",
     "apollo-server-express": "^2.19.2",
+    "aws-sdk": "^2.1012.0",
     "bcryptjs": "^2.4.3",
     "dotenv": "^10.0.0",
     "graphql": "^15.6.1",

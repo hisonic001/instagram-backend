@@ -3,7 +3,18 @@ import client from "../client";
 export default {
   Photo: {
     user: ({ userId }) => client.user.findUnique({ where: { id: userId } }),
+
     totalLikes: ({ id }) => client.like.count({ where: { photoId: id } }),
+
+    totalComments: ({ id }) => client.comment.count({ where: { photoId: id } }),
+
+    isMine: ({ userId }, __, { loggedInUser }) => {
+      if (!loggedInUser) {
+        return false;
+      }
+      return userId === loggedInUser.id;
+    },
+
     hashtags: (
       { id } // id의 주체는 root인 photo
     ) =>

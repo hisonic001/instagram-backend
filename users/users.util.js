@@ -28,10 +28,18 @@ export const getUser = async (authorization) => {
 // ex) protectResolver(OurResolver(root,args,context,info))와 비슷하게 동작
 export const protectResolver = (ourResolver) => (root, args, context, info) => {
   if (!context.loggedInUser) {
-    return {
-      ok: false,
-      error: "you are not logged in",
-    };
+    const isQuery = info.operation.operation === "query";
+    if (isQuery) {
+      return null;
+    } else {
+      return {
+        ok: false,
+        error: "you are not logged in",
+      };
+    }
   }
   return ourResolver(root, args, context, info);
 };
+
+// (_,_,_,info) info를 통해서 현재 type이 mutation인지 query인지 등을 확인 가능
+// info로 type을 확인해서 query도 보호해 줄수 있다.

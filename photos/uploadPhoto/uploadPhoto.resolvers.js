@@ -1,19 +1,20 @@
 import client from "../../client";
 import { protectResolver } from "../../users/users.util";
 import { composeHashtag } from "../photos.util";
+import { uploadAWS } from "../../shared/shared.util";
 
 const resolverFnc = async (_, { file, caption }, { loggedInUser }) => {
-  console.log(file, caption, loggedInUser.userName);
-
   //   parse caption and create hashtag
   //  extract hashtag from caption with regex
   let hashtagObj = [];
   if (caption) {
     hashtagObj = composeHashtag(caption);
   }
+
+  const fileURL = await uploadAWS(file, loggedInUser.id, "uploadPhotos");
   return client.photo.create({
     data: {
-      file,
+      file: fileURL,
       caption,
       user: {
         connect: {

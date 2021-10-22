@@ -6,8 +6,10 @@ export default gql`
     user: User!
     file: String!
     caption: String
+    isMine: Boolean!
     hashtags: [Hashtag]
-    totalLikes: Int
+    totalLikes: Int!
+    totalComments:Int!
     createdAt: String!
     updatedAt: String!
   }
@@ -17,7 +19,7 @@ export default gql`
     hashtag: String!
     photos(page: Int): [Photo]
     ${/*type에서 직접적으로 page와 같은 argument 설정이 가능*/ ""}
-    totalPhotos: Int
+    totalPhotos: Int!
     createdAt: String!
     updatedAt: String!
   }
