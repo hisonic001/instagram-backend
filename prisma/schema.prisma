@@ -26,9 +26,10 @@ model User {
   // follwer와 following은 User의 Array
   follower  User[]   @relation("FollowRelation", references: [id])
   following User[]   @relation("FollowRelation", references: [id])
+  likes     Like[]
+  photos    Photo[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  photos    Photo[]
 }
 
 model Photo {
@@ -38,9 +39,10 @@ model Photo {
   userId    Int
   file      String
   caption   String?
+  hashtags  Hashtag[]
+  likes     Like[]
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
-  hashtags  Hashtag[]
 }
 
 model Hashtag {
@@ -50,4 +52,17 @@ model Hashtag {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+}
+
+model Like {
+  id        Int      @id @default(autoincrement())
+  photo     Photo    @relation(fields: [photoId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+  photoId   Int
+  userId    Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // 두개의 data set들을 combine하여 unique하게
+  @@unique([photoId, userId])
 }

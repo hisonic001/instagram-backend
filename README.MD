@@ -43,7 +43,7 @@ https://github.com/hisonic001/instagram-backend
 [✔] See Hashtags
 [✔] See Caption
 [✔] Edit Photo
-[] Like / Unlike Photo
+[✔] Like / Unlike Photo
 [] See Photo Likes
 [] See Feed
 [] Search Photos

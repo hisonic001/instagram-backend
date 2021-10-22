@@ -3,6 +3,8 @@ import { protectResolver } from "../../users/users.util";
 import { composeHashtag } from "../photos.util";
 
 const resolverFnc = async (_, { file, caption }, { loggedInUser }) => {
+  console.log(file, caption, loggedInUser.userName);
+
   //   parse caption and create hashtag
   //  extract hashtag from caption with regex
   let hashtagObj = [];
@@ -35,6 +37,6 @@ const resolverFnc = async (_, { file, caption }, { loggedInUser }) => {
 
 export default {
   Mutation: {
-    uploadPhoto: () => protectResolver(resolverFnc),
+    uploadPhoto: protectResolver(resolverFnc),
   },
 };
