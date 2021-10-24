@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "DM" ADD COLUMN     "isSeen" BOOLEAN NOT NULL DEFAULT false;

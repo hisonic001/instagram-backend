@@ -6,12 +6,14 @@ export default gql`
     text: String!
     user: User!
     room: Room!
+    isSeen: Boolean!
     createdAt: String!
     updatedAt: String!
   }
 
   type Room {
     id: Int!
+    totalUnSeen: Int!
     users: [User]
     DMs: [DM]
     createdAt: String!

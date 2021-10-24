@@ -97,6 +97,7 @@ model DM {
   userId    Int
   room      Room     @relation(fields: [roomId], references: [id])
   roomId    Int
+  isSeen    Boolean  @default(false) // 기본으로 안읽음 상태
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

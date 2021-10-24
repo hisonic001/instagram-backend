@@ -1,7 +1,7 @@
 import client from "../../client";
 import { protectResolver } from "../../users/users.util";
 
-const queryFnc = async (_, __, { loggedInUser }) =>
+const resolverFnc = async (_, __, { loggedInUser }) =>
   client.room.findMany({
     where: {
       users: { some: { id: loggedInUser.id } },
@@ -10,6 +10,6 @@ const queryFnc = async (_, __, { loggedInUser }) =>
 
 export default {
   Query: {
-    seeRooms: protectResolver(queryFnc),
+    seeRooms: protectResolver(resolverFnc),
   },
 };

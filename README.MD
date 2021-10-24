@@ -76,8 +76,9 @@ https://github.com/hisonic001/instagram-backend
 ```
 [✔] Create Room
 [✔] Send Massage
-[] See Room
-[] See Rooms
+[✔] See Room
+[✔] Computed Fields
+[✔] Seen/UnSeen Message
 [] Realtime Massage
 ```
 
