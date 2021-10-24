@@ -12,9 +12,9 @@ AWS.config.update({
 });
 
 export const uploadAWS = async (file, userId, folder) => {
-  const { fileName, createReadStream } = await file;
+  const { filename, createReadStream } = await file;
   const readStream = createReadStream();
-  const newFileName = `${folder}/${userId}-${Date.now}-${fileName}`;
+  const newFileName = `${folder}/${userId}-${Date.now}-${filename}`;
   //file 이름 앞에 경로를 적어주면 폴더까지 생성해줌
   // AWS에서 return한 정보중 Location에 URL 정보
   const { Location } = await new AWS.S3()
@@ -24,6 +24,6 @@ export const uploadAWS = async (file, userId, folder) => {
       ACL: "public-read", // object privacy
       Body: readStream, // stream 입력
     })
-    .promise();
-  return Location;
+    .promise(); //return 받기
+  return Location; // aws에 저장된 url을 return
 };

@@ -2,7 +2,7 @@
 CREATE TABLE "Photo" (
     "id" SERIAL NOT NULL,
     "userId" INTEGER NOT NULL,
-    "file" TEXT NOT NULL,
+    "fileURL" TEXT NOT NULL,
     "caption" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,

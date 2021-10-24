@@ -28,9 +28,11 @@ model User {
   following User[]    @relation("FollowRelation", references: [id])
   likes     Like[]
   photos    Photo[]
+  comments  Comment[]
+  rooms     Room[]
+  DMs       DM[]
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
-  comments  Comment[]
 }
 
 model Photo {
@@ -76,6 +78,25 @@ model Comment {
   photo     Photo    @relation(fields: [photoId], references: [id])
   photoId   Int
   text      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Room {
+  id        Int      @id @default(autoincrement())
+  users     User[]
+  DMs       DM[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model DM {
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [userId], references: [id])
+  text      String
+  userId    Int
+  room      Room     @relation(fields: [roomId], references: [id])
+  roomId    Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

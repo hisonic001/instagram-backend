@@ -38,4 +38,11 @@ followers/following{
         https://regexone.com/ regex 관련 하나씩 연습해보는 사이트
         https://regex101.com/ debugging 및 연습
     }
+
+    real-time massage function{
+        규모가 커지면 추가로 implement 필요
+        elixir or erlang과 같은 고성능 언어가
+        대용량 실시간 처리에 유리
+    }
+
 }

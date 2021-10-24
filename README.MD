@@ -63,11 +63,23 @@ https://github.com/hisonic001/instagram-backend
 
 ## AWS SDK
 
+```
 [✔] Connect to AWS
 [✔] Upload Photo to AWS
 [✔] Upload Avatar to AWS
+```
 
 ---
+
+## DM
+
+```
+[✔] Create Room
+[✔] Send Massage
+[] See Room
+[] See Rooms
+[] Realtime Massage
+```
 
 ### Working Progress
 
