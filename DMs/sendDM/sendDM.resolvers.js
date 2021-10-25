@@ -1,4 +1,5 @@
 import client from "../../client";
+import pubsub from "../../pubsub";
 import { protectResolver } from "../../users/users.util";
 
 const resolverFnc = async (_, { userId, roomId, text }, { loggedInUser }) => {
@@ -21,8 +22,8 @@ const resolverFnc = async (_, { userId, roomId, text }, { loggedInUser }) => {
     // 새로운 room에 본인과 메세지를 보내는 대상을 connect
     room = await client.room.create({
       data: {
-        users: { connect: { id: loggedInUser.id, id: loggedInUser.id } },
-      },
+        users: { connect: [{ id: userId }, { id: loggedInUser.id }] },
+      }, // 2개를 connect 할때는 []로 묶어주기
     });
   } else if (roomId) {
     // 기존의 룸 id를 활용,  룸 찾기
@@ -39,13 +40,17 @@ const resolverFnc = async (_, { userId, roomId, text }, { loggedInUser }) => {
     }
   }
   // 새로운 DM 생성
-  await client.dM.create({
+  const createdDM = await client.dM.create({
     data: {
       user: { connect: { id: loggedInUser.id } },
       text,
       room: { connect: { id: room.id } },
     },
   });
+  // pubsub를 통해서 event publish
+  // publish 하는 event는 listening하는 것과 같은 형식의 roomupdates이며
+  // createdDM을 ...으로 열어서 안의 내용이 publish될 수 있도록 한다.
+  pubsub.publish("NEW_DM", { roomUpdates: { ...createdDM } });
 
   return {
     ok: true,

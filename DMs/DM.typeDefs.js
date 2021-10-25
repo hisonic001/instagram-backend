@@ -15,7 +15,7 @@ export default gql`
     id: Int!
     totalUnSeen: Int!
     users: [User]
-    DMs: [DM]
+    DMs(lastRecord: Int): [DM]
     createdAt: String!
     updatedAt: String!
   }

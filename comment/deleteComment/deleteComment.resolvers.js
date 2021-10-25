@@ -1,9 +1,9 @@
 import client from "../../client";
 import { protectResolver } from "../../users/users.util";
 
-const resolverFnc = async (_, { id }, { loggedInUser }) => {
+const resolverFnc = async (_, { photoId }, { loggedInUser }) => {
   const checkComment = await client.comment.findUnique({
-    where: { id },
+    where: { photoId },
     select: { userId: true },
   });
   if (!checkComment) {
@@ -17,7 +17,7 @@ const resolverFnc = async (_, { id }, { loggedInUser }) => {
       error: "You are not authorized",
     };
   } else {
-    await client.comment.delete({ where: { id } });
+    await client.comment.delete({ where: { photoId } });
   }
   return {
     ok: true,

@@ -45,4 +45,39 @@ followers/following{
         대용량 실시간 처리에 유리
     }
 
+    PubSub(published-subscribe engine){
+        apollo server에 내장된 PubSub는 교육용으로 실사용에는 추천하지 않음
+        Redis PubSub를 실사용에 추천 -> 유료
+
+        여러개의 프로그램이 혹은 여러 서버가 해당 채널을 subscribe
+        서버에서 이벤트가 발생
+        모든 구독자들이 해당 이벤트를 받을 수 있음
+        바로 메세지를 전송하므로  메세지를 보관하지 않음
+        주로 채팅, 푸시, 알림, 스트리밍, 온라인게임 등에 사용
+        
+        web-socket을 사용해 실시간으로 push 를 해주기 때문에
+        ws와 같은 다른 protocol 사용
+        http는 사용x
+    }
+
+    protocol : http와 web-socket의 차이{
+        http{
+            client의 request가 있을 시에만 서버가 응답하여 data 전송 후
+            바로 연결 끊기, 단방향 통신 (연결상태 유지하지 않음 stateless)
+        }
+
+        Socket{
+            client와 서버가 특정 port를 통해서 연결 유지
+            실시간으로 양방향 통신 가능
+            client도 server에 request &
+            Server 또한 clinet에게 request가능
+            양방향통신(연결상태 유지 stateful)
+            
+            web-socket - web에서 사용하는 socket 방식 통신
+            protocol로는 ws,wss 사용
+            port는 HTTP(80), HTTPS(433)
+            client와 serv1er가 TCP 라인을 통해 지속적으로 연결됨
+        }
+    }
+
 }

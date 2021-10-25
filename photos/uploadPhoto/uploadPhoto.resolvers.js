@@ -7,11 +7,13 @@ const resolverFnc = async (_, { file, caption }, { loggedInUser }) => {
   //   parse caption and create hashtag
   //  extract hashtag from caption with regex
   let hashtagObj = [];
+  const folder = "uploadPhotos";
+
   if (caption) {
     hashtagObj = composeHashtag(caption);
   }
 
-  const fileURL = await uploadAWS(file, loggedInUser.id, "uploadPhotos");
+  const fileURL = await uploadAWS(file, loggedInUser.id, folder);
   return client.photo.create({
     data: {
       file: fileURL,

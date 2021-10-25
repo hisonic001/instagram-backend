@@ -3,11 +3,12 @@ import client from "../client";
 export default {
   Room: {
     users: ({ id }) => client.room.findUnique({ where: { id } }).users(),
-    DMs: ({ id }, { page }) =>
+    DMs: ({ id }, { lastRecord }) =>
       client.dM.findMany({
         where: { roomId: id },
-        skip: (page - 1) * 5,
         take: 5,
+        skip: lastRecord ? 1 : 0,
+        ...(lastRecord && { cursor: { id: lastRecord } }),
       }),
 
     // 안읽은 메시지 카운트
@@ -15,7 +16,7 @@ export default {
       if (!loggedInUser) {
         return 0;
       }
-      client.dM.count({
+      return client.dM.count({
         where: {
           isSeen: false,
           roomId: id,
@@ -24,5 +25,8 @@ export default {
         },
       });
     },
+  },
+  DM: {
+    user: ({ id }) => client.dM.findUnique({ where: { id } }).user(),
   },
 };

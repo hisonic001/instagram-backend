@@ -18,7 +18,10 @@ const resolverFnc = async (_, { id, newText }, { loggedInUser }) => {
       error: "You are authorized to change comment",
     };
   } else {
-    await client.comment.update({ where: { id }, data: { text: newText } });
+    await client.comment.update({
+      where: { id },
+      data: { text: newText },
+    });
   }
   return {
     ok: true,
