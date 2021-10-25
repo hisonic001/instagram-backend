@@ -95,4 +95,4 @@ Sample Follow User
 
 ## **Frontend Part**
 
-update soon...
+https://github.com/hisonic001/instaclone-web
