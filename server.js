@@ -9,6 +9,7 @@ import { ApolloServer } from "apollo-server-express"; // babel로 js 문법을 �
 import { typeDefs, resolvers } from "./schema";
 import { getUser } from "./users/users.util";
 import logger from "morgan";
+import { ConnectContactLens } from "aws-sdk";
 
 const PORT = process.env.PORT; //env에서 PORT 가져오기
 // import한 tyDefs와 resolvers로 new ApploServer 시작
@@ -17,13 +18,34 @@ const server = new ApolloServer({
   // to use Upload scalar type built in apollo server
   typeDefs,
   resolvers,
-  context: async ({ req }) => {
-    // http protocol이 아닌 web-socket 방식으로 접근시 request가 존재하지 않음
-    if (req) {
+  context: async (ctx) => {
+    // 1. http 방식으로 request의 header에서 token값을 가져와 user 정보 return
+    if (ctx.req) {
       return {
-        loggedInUser: await getUser(req.headers.authorization),
+        loggedInUser: await getUser(ctx.req.headers.authorization),
       };
     }
+    // 2. http protocol이 아닌 web-socket 방식으로 접근시 request가 존재하지 않음
+    // onConnect에서 전달된 user 정보 꺼내기
+    else {
+      const authorization = ctx.connection.context.authorization;
+      return {
+        loggedInUser: await getUser(authorization),
+      };
+    }
+  },
+  // subsription resolver의 onConnect를 통해서 http header를 바로 받아볼 수 있다.
+  subscriptions: {
+    // 바로 token을 header에서 추출
+    onConnect: ({ authorization }) => {
+      // header가 없으면 throw error
+      if (!authorization) {
+        throw new Error("You can't listen");
+      }
+      return {
+        authorization,
+      };
+    },
   },
 });
 

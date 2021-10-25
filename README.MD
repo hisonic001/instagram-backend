@@ -79,7 +79,7 @@ https://github.com/hisonic001/instagram-backend
 [✔] See Room
 [✔] Computed Fields
 [✔] Seen/UnSeen Message
-[] Realtime Massage
+[✔] Realtime Massage
 ```
 
 ### Working Progress

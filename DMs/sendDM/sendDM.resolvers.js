@@ -29,7 +29,7 @@ const resolverFnc = async (_, { userId, roomId, text }, { loggedInUser }) => {
     // 기존의 룸 id를 활용,  룸 찾기
     room = await client.room.findUnique({
       where: { id: roomId },
-      select: { roomId: true },
+      select: { id: true },
     });
     // roomID 기반의 room이 없으면 error
     if (!room) {
